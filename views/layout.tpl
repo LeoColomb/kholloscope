@@ -25,6 +25,11 @@
         <p class="lead">Retrouvez vos dates et salle de khôlles.</p>
       </div>
 
+      <table class="table table-striped table-hover table-bordered">
+        % for item in kholles:
+            <td><a href="{{ item }}">{{ item }}</a></td>
+        % end
+      </table>
     </div>
 </body>
 </head>

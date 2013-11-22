@@ -13,8 +13,10 @@
     @copyright (c) 2013 Léo Colombaro
     @license MIT LICENSE
     @package Python 3
-    @modules bottle
+    @modules bottle, datetime
 """
+from bottle import route, run, template, static_file, response, debug
+import datetime
 
 """    Configuration    """
 
@@ -23,14 +25,16 @@ _port = 1357
 _debug = True
 
 
-"""    Publication    """
+"""    Données    """
+def get_kholles():
+    return
 
-from bottle import route, run, template, static_file, response, debug
+"""    Publication    """
 
 @route(_route)
 def kholle(classe):
     response.set_header('Content-Language', 'fr')
-    return template('layout', name=classe.upper())
+    return template('layout', name=classe.upper(), kholles=get_kholles())
 
 @route('/assets/<filepath:path>')
 def server_static(filepath):
