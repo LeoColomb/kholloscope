@@ -1,0 +1,29 @@
+﻿<!-- Insertion du contenu dans le schema 'base.html' -->
+% rebase base title='Khôlles de '+name
+<div class="page-header">
+    <h1>Khôlles de {{ name }}</h1>
+    <p class="lead">Retrouvez vos dates et salles de khôlles.</p>
+</div>
+
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <td>Rang</td>
+            <td>1&#176;</td>
+            <td>2&#176;</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        % sem = '1'
+        % for row in kholles:
+        % if sem != row[0]:
+        % sem = row[0]
+        </tr>
+        <tr>
+            % end
+            <td><label>{{ row[1] }}</label><label>{{ row[2] }}</label><label>{{ row[3] }}</label><label>{{ row[4] }}</label><label>{{ row[5] }}</label></td>
+            % end
+        </tr>
+    </tbody>
+</table>
