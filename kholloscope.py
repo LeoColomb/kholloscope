@@ -15,7 +15,7 @@
     @package Python 3
     @modules bottle, datetime, csv
 """
-from bottle import route, run, template, static_file, response, debug, abort, error
+from bottle import route, run, view, static_file, debug, abort, error, request
 import datetime
 import csv
 
@@ -29,6 +29,12 @@ _debug = True
 """    Données    """
 
 def get_kholles(classe):
+    """ Analyser le fichier-tableau et le convertir en
+        données Python
+
+        @param classe Nom de la classe = Nom du fichier
+        @return khl Liste de colles
+    """
     try:
         datafile = open('data/' + classe + '.csv')
     except OSError:
@@ -41,17 +47,19 @@ def get_kholles(classe):
 """    Publication    """
 
 @route(_route)
+@view('kholles')
 def kholle(classe):
-    response.set_header('Content-Language', 'fr')
-    return template('kholles', name=classe.upper(), kholles=get_kholles(classe))
+    group = request.get_cookie("group")
+    return dict(name=classe.upper(), kholles=get_kholles(classe))
 
 @route('/assets/<filepath:path>')
 def server_static(filepath):
     return static_file(filepath, root='assets')
 
 @error(404)
+@view('base')
 def error404(error):
-    return template('base', title='Erreur · 404', base='<div class="page-header"><h1>404<h1><p class="lead">Vous me posez une colle : je ne connais pas cette page…</p></div>')
+    return dict(title='Erreur · 404', base='<div class="page-header"><h1>404<h1><p class="lead">Vous me posez une colle : je ne connais pas cette page…</p></div>')
 
 if _debug:
     debug(True)
