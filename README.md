@@ -40,6 +40,10 @@ Configuration
 
 Dans le fichier `setup.py`, il est possible de paramétrer les valeurs suivantes :
 
+### `_annee`
+Date de début d'année
+_Par défaut, `_debug = False`._
+
 ### `_debug`
 Permet de passer en mode débogage, et obtenir davantage de détails lors d'une erreur.  
 Particulièrement utile lors de problèmes à répétition. N'hésitez pas alors à ouvrir un 
@@ -59,7 +63,7 @@ _Par défaut, `_path = 8080`, et aucun changement n'est nécessaire._
 
 ### `_route`
 Défini comment le nom de la classe doit être analysé à partir l'URI.  
-_Par défaut, `_route = "/<classe:re:[a-z]+>"`._
+_Par défaut, `_route = "/<classe:re:[a-zA-Z]+>"`._
 
 Initialisation
 --------------
