@@ -9,7 +9,7 @@
     https://github.com/LeoColomb/kholloscope
     Copyright (c) 2013, Léo Colombaro
 
-    @version 0.0.2
+    @version 0.0.3
     @copyright (c) 2013 Léo Colombaro
     @license MIT LICENSE
     @package Python 3
