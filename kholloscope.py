@@ -23,8 +23,8 @@ import csv
 
 _annee = date(datetime.now().year, 9, 1)
 _debug = True
-_path = ""
-_port = 1357
+_path  = ""
+_port  = 1357
 _route = '/<classe:re:[a-zA-Z]+>'
 
 
@@ -64,9 +64,9 @@ def get_rank(grp):
 def kholle(classe):
     group = request.query.grp
     if group:
-        response.set_cookie("grp", group)
+        response.set_cookie(classe+"_grp", group)
     else:
-        group = request.get_cookie("grp")
+        group = request.get_cookie(classe+"_grp")
     return dict(name=classe.upper(),
                 kholles=get_kholles(classe),
                 group=group,
