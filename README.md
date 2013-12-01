@@ -72,28 +72,35 @@ Dans le dossier `data` sont sauvegardé les différents kholloscopes de chaque
 classe. Pour cela, quelques indications :
 
 * **Le nom du fichier est le nom de la classe en question.**  
-Il définira l'URI spécifique à cette classe, telle que [`_route`](#_route) l'indique.  
-Par exemple, le fichier s'appelle `mpsi.csv`, alors on y accède *via* `http://example.com/mpsi`.  
-Noter l'absence d'extension.
+  Il définira l'URI spécifique à cette classe, telle que [`_route`](#_route) l'indique.  
+  Par exemple, le fichier s'appelle `mpsi.csv`, alors on y accède *via* `http://example.com/mpsi`.  
+  Noter l'absence d'extension.
 
 * **Le fichier doit être au format [CSV](http://fr.wikipedia.org/wiki/Comma-separated_values).**  
-Les avantages de ce format sont nombreux, mais nous importe celui de l'édition dans n'importe
-quel tableur-grapheur, et sa facilité de manipulation. 
+  Les avantages de ce format sont nombreux, mais nous importe celui de l'édition dans n'importe
+  quel tableur-grapheur, et sa facilité de manipulation. 
 
 * **La structure du tableau doit suivre les indications de la légende suivante.**  
+  La première ligne permet d'énumerer le nom de chaque groupe.
 
-| Semaine 1 | Semaine 2 | ... | 
-|:---------:|:---------:|:---:|
-|*Matiere 1*|*Matiere 1*|*...*|
-| Colleur   | Colleur   | ... |
-| Jour 0-6  | Jour 0-6  | ... |
-| Salle     | Salle     | ... |
-| Horaire   | Horaire   | ... |
-| Remarques | Remarques | ... |
-|*Matiere 2*|*Matiere 2*|*...*|
-| ...       | ...       | ... |
+  | Nom du groupe 1 | Nom du groupe 2 | Nom du groupe 3 | ... |
+  |:---------------:|:---------------:|:---------------:|:---:|
 
-En cas de doute, prenez exemple sur le fichier fournit dans l'archive.
+  Ensuite, avec autant de semaine désirées sur l'horizontal, et autant de séance par semaine sur
+  la verticale. Ainsi :
+
+  | Semaine 1 | Semaine 2 | Semaine 3 | ... | 
+  |:---------:|:---------:|:---------:|:---:|
+  |*Matiere 1*|*Matiere 1*|*Matiere 1*|*...*|
+  | Colleur   | Colleur   | Colleur   | ... |
+  | Jour 0-6  | Jour 0-6  | Jour 0-6  | ... |
+  | Salle     | Salle     | Salle     | ... |
+  | Horaire   | Horaire   | Horaire   | ... |
+  | Remarques | Remarques | Remarques | ... |
+  |*Matiere 2*|*Matiere 2*|*Matiere 2*|*...*|
+  | ...       | ...       | ...       | ... |
+
+  En cas de doute, prenez exemple sur le fichier fournit dans l'archive.
 
 Notes de version
 ----------------

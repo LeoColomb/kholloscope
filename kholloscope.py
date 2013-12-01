@@ -15,18 +15,17 @@
     @package Python 3
     @modules bottle, datetime, csv
 """
+
+__name__ = 'Kholloscope'
+__description__ = "Petit framework pour grand kholloscope."
+__version__ = '0.0.3'
+__author__ = "Leo Colombaro"
+__license__ = 'MIT'
+
 from bottle import route, run, view, static_file, debug, abort, error, request, response
 from datetime import date, datetime
 import csv
-
-"""    Configuration    """
-
-_annee = date(datetime.now().year, 9, 1)
-_debug = True
-_path  = ""
-_port  = 1357
-_route = '/<classe:re:[a-zA-Z]+>'
-
+import config
 
 """    Données    """
 
@@ -59,14 +58,14 @@ def get_rank(grp):
 
 """    Publication    """
 
-@route(_route)
+@route(config.__route)
 @view('kholles')
 def kholle(classe):
     group = request.query.grp
     if group:
-        response.set_cookie(classe+"_grp", group)
+        response.set_cookie(classe + "_grp", group)
     else:
-        group = request.get_cookie(classe+"_grp")
+        group = request.get_cookie(classe + "_grp")
     return dict(name=classe.upper(),
                 kholles=get_kholles(classe),
                 group=group,
@@ -83,5 +82,5 @@ def error404(error):
                 head=dict(tle='404', dsc='Vous me posez une colle : je ne connais pas cette page…'),
                 base='<small class="text-muted">' + str(error) + '<small>')
 
-debug(_debug)
-run(host='localhost', port=_port, reloader=_debug)
+debug(config.__debug)
+run(host='localhost', port=config.__port, reloader=config.__debug)
