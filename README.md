@@ -38,32 +38,32 @@ dans un répertoire du serveur, de préférence à la racine.
 Configuration
 -------------
 
-Dans le fichier `setup.py`, il est possible de paramétrer les valeurs suivantes :
+Dans le fichier `config.py`, il est possible de paramétrer les valeurs suivantes :
 
-### `_annee`
+### `__first`
 Date de début d'année
-_Par défaut, `_debug = False`._
+_Par défaut, `__first = date(datetime.now().year, 9, 1)`._
 
-### `_debug`
+### `__debug`
 Permet de passer en mode débogage, et obtenir davantage de détails lors d'une erreur.  
 Particulièrement utile lors de problèmes à répétition. N'hésitez pas alors à ouvrir un 
 [ticket](https://github.com/LeoColomb/kholloscope/issues/new) !  
-_Par défaut, `_debug = False`._
+_Par défaut, `__debug = False`._
 
-### `_path`
+### `__path`
 Si jamais la racine du dossier du projet n'est pas la même que celle 
-du serveur, attribuer à `_path` le chemin URL d'accès.  
+du serveur, attribuer à `__path` le chemin URL d'accès.  
 Par exemple : Kholloscope de MPSI accessible à `http://example.com/un/deux/trois/mpsi`,
-alors `_path = "un/deux/trois/"`.  
-_Par défaut, `_path = ""`._
+alors `__path = "un/deux/trois/"`.  
+_Par défaut, `__path = ""`._
 
-### `_port`
+### `__port`
 Au cas où l'accès HTTP au serveur se fait par un port diffèrent de `80`.  
-_Par défaut, `_path = 8080`, et aucun changement n'est nécessaire._
+_Par défaut, `__port = 8080`, et aucun changement n'est nécessaire._
 
-### `_route`
+### `__route`
 Défini comment le nom de la classe doit être analysé à partir l'URI.  
-_Par défaut, `_route = "/<classe:re:[a-zA-Z]+>"`._
+_Par défaut, `__route = "/<classe:re:[a-zA-Z0-9_-]+>"`._
 
 Initialisation
 --------------
@@ -72,7 +72,7 @@ Dans le dossier `data` sont sauvegardé les différents kholloscopes de chaque
 classe. Pour cela, quelques indications :
 
 * **Le nom du fichier est le nom de la classe en question.**  
-  Il définira l'URI spécifique à cette classe, telle que [`_route`](#_route) l'indique.  
+  Il définira l'URI spécifique à cette classe, telle que [`__route`](#_route) l'indique.  
   Par exemple, le fichier s'appelle `mpsi.csv`, alors on y accède *via* `http://example.com/mpsi`.  
   Noter l'absence d'extension.
 
