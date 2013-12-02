@@ -25,9 +25,14 @@ __license__ = 'MIT'
 from bottle import route, run, view, static_file, debug, abort, error, request, response
 from datetime import date, datetime
 import csv
+import math
 import config
 
 """    Données    """
+
+data = {'color': ['success', 'info', 'warning', 'danger', 'default'],
+        'cells': ['Colleur', 'Jour', 'Salle', 'Horaire'],
+        'days': ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']}
 
 def get_kholles(cls):
     """ Analyser le fichier-tableau et le convertir en
@@ -53,7 +58,7 @@ def get_rank(grp):
         @return rnk Rang actuel du groupe
     """
     if not grp:
-        return
+        return 3
     return 2
 
 """    Publication    """
@@ -66,10 +71,13 @@ def kholle(classe):
         response.set_cookie(classe + "_grp", group)
     else:
         group = request.get_cookie(classe + "_grp")
+    kholles=get_kholles(classe)
+    data['max'] = math.ceil((len(kholles)-2)/6)
     return dict(name=classe.upper(),
-                kholles=get_kholles(classe),
+                kholles=kholles,
                 group=group,
-                rang=get_rank(group))
+                rang=get_rank(group),
+                data=data)
 
 @route('/assets/<filepath:path>')
 def server_static(filepath):
@@ -79,7 +87,7 @@ def server_static(filepath):
 @view('base')
 def error404(error):
     return dict(title='Erreur · 404',
-                head=dict(tle='404', dsc='Vous me posez une colle : je ne connais pas cette page…'),
+                head={'tle': '404', 'dsc': 'Vous me posez une colle : je ne connais pas cette page…'},
                 base='<small class="text-muted">' + str(error) + '<small>')
 
 debug(config.__debug)

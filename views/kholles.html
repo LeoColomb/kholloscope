@@ -15,7 +15,7 @@
     </div>
 </form>
 <hr />
-<table class="table table-striped table-hover table-responsive visible-md visible-lg">
+<table class="table table-striped table-hover table-responsive" style="table-layout: fixed !important;">
     <thead>
         <tr>
             % for item in kholles[1]:
@@ -33,3 +33,30 @@
         % end
     </tbody>
 </table>
+
+% for k in range(data['max']):
+% if kholles[(6*k)+2][rang]:
+<div class="panel panel-{{ data['color'][k % len(data['color'])] }}">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ kholles[(6*k)+2][rang] }}</h3>
+    </div>
+    % if kholles[(6*k)+7][rang]:
+    <div class="panel-body alert-{{ data['color'][k % len(data['color'])] }}">
+        {{ kholles[(6*k)+7][rang] }}
+    </div>
+    % end
+    <ul class="list-group">
+        % for i, c in enumerate(data['cells']):
+        <li class="list-group-item">
+            <span class="badge">{{ c }}</span>
+            % if i == 1:
+            {{ data['days'][int(kholles[(6*k)+3+i][rang])] }}
+            % else:
+            {{ kholles[(6*k)+3+i][rang] }}
+            % end
+        </li>
+        % end
+    </ul>
+</div>
+% end
+% end
