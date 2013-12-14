@@ -2,7 +2,7 @@
 ## Kholloscope
 #############
 
-data/
+data/*
 !data/sample.csv
 
 #############
