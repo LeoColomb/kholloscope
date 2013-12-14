@@ -28,7 +28,7 @@ from bottle import (
     debug, abort,
     error, request,
     response )
-from datetime import date, datetime
+from datetime import datetime
 from math import ceil
 import csv
 import config
@@ -66,21 +66,24 @@ def get_rank(grp, max):
     :return rnk: Rang actuel du groupe
     """
     if not grp:
-        return
+        return -1
     vacfile = open('data/zone_' + config.__zone + '.csv')
     data = csv.reader(vacfile, delimiter=';')
     vacs = list(tuple(row) for row in data)
     vacfile.close()
-    start = int(vacs[0][1])
     now = datetime.now().isocalendar()[1]
-    delt = 0
-    for vac in vacs:
+    delt = config.__decal 
+    for vac in vacs[1:]:
         if int(vac[1]) <= now:
+            # Vacances passées, décompte des semaines non "ouvrées"
             delt += (int(vac[1]) - int(vac[0]))
-        elif int(vac[1]) <= now <= int(vac[0]):
+        elif int(vac[0]) <= now < int(vac[1]):
+            # En vacances, arrêt de la progression dans le kholloscope
             delt += now - int(vac[0])
             break
-    return (now - delt + int(grp)) % max
+    # Ordre * ( Maintenant - Delta des vacances - Début de l'année
+    # + Décalage groupe ) % Modulo max groupe
+    return int(config.__ordre + '1') * (now - delt - int(vacs[0][1]) - int(grp)) % max
 
 ################
 ### Publication
@@ -90,7 +93,7 @@ def get_rank(grp, max):
 def kholle(classe):
     group = request.query.grp
     if group:
-        response.set_cookie(classe + "_grp", group)
+        response.set_cookie(classe + "_grp", group, None, max_age=3600 * 24 * 30)
     else:
         group = request.get_cookie(classe + "_grp")
     kholles = get_kholles(classe)

@@ -15,7 +15,7 @@
     </div>
 </form>
 <hr />
-<table class="table table-striped table-hover table-responsive" style="table-layout: fixed !important;">
+<table class="table table-striped table-hover table-responsive visible-lg visible-md" style="table-layout: fixed !important;">
     <thead>
         <tr>
             % for item in kholles[1]:
@@ -24,17 +24,31 @@
         </tr>
     </thead>
     <tbody>
-        % for row in kholles[2:]:
+        % for r, row in enumerate(kholles[2:]):
         <tr>
-            % for item in row:
-            <td>{{ item }}</td>
+            % if r % 6 == 5:
+            <td colspan="{{ len(kholles[0]) }}"><hr /></td>
+            % else:
+            % for i, item in enumerate(row):
+            % if defined('rang') and i == rang:
+            <td class="success">
+                % else:
+            <td>
+                % end
+                % if r % 6 == 2:
+                {{ data['days'][int(item)] }}
+                % else:
+                {{ item }}
+                % end
+            </td>
+            % end
             % end
         </tr>
         % end
     </tbody>
 </table>
 <div class="visible-xs visible-sm">
-    % if defined('rang') and rang:
+    % if defined('rang') and rang > -1:
     % for k in range(data['max']):
     % if kholles[(6*k)+2][rang]:
     <div class="panel panel-{{ data['color'][k % len(data['color'])] }}">
@@ -59,7 +73,6 @@
             % end
         </ul>
     </div>
-    {{ rang }}
     % end
     % end
     % else:
