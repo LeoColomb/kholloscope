@@ -9,7 +9,7 @@ en Python, le kholloscope d'une classe préparatoire.
 https://github.com/LeoColomb/kholloscope
 Copyright (c) 2013, Léo Colombaro
 
-:version: 0.0.3
+:version: 0.0.9
 :copyright: (c) 2013 Léo Colombaro
 :license: MIT LICENSE
 :package: Python 3
