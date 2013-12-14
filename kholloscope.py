@@ -1,45 +1,52 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-    Kholloscope
-    ~~~~~~~~~~~
-    Petit framework pour grand kholloscope. Publier facilement,
-    en Python, le kholloscope d'une classe préparatoire.
+Kholloscope
+~~~~~~~~~~~
+Petit framework pour grand kholloscope. Publier facilement,
+en Python, le kholloscope d'une classe préparatoire.
 
-    https://github.com/LeoColomb/kholloscope
-    Copyright (c) 2013, Léo Colombaro
+https://github.com/LeoColomb/kholloscope
+Copyright (c) 2013, Léo Colombaro
 
-    @version 0.0.3
-    @copyright (c) 2013 Léo Colombaro
-    @license MIT LICENSE
-    @package Python 3
-    @modules bottle, datetime, csv
+:version: 0.0.3
+:copyright: (c) 2013 Léo Colombaro
+:license: MIT LICENSE
+:package: Python 3
+:modules: bottle, datetime, csv
 """
 
 __name__ = 'Kholloscope'
 __description__ = "Petit framework pour grand kholloscope."
 __version__ = '0.0.3'
-__author__ = "Leo Colombaro"
+__author__ = "Léo Colombaro"
 __license__ = 'MIT'
 
-from bottle import route, run, view, static_file, debug, abort, error, request, response
+from bottle import (
+    route, run,
+    view, static_file,
+    debug, abort,
+    error, request,
+    response )
 from datetime import date, datetime
+from math import ceil
 import csv
-import math
 import config
 
-"""    Données    """
-
+############
+### Données
+############
 data = {'color': ['success', 'info', 'warning', 'danger', 'default'],
         'cells': ['Colleur', 'Jour', 'Salle', 'Horaire'],
-        'days': ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']}
+        'days': ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        }
 
 def get_kholles(cls):
-    """ Analyser le fichier-tableau et le convertir en
-        données Python
+    """Analyser le fichier-tableau et le convertir
+    en données Python
 
-        @param cls Nom de la classe = Nom du fichier
-        @return khl Liste de colles
+    :param cls: Nom de la classe = Nom du fichier
+    :return khl: Liste de colles
     """
     try:
         datafile = open('data/' + cls + '.csv')
@@ -50,19 +57,34 @@ def get_kholles(cls):
     datafile.close()
     return khl
 
-def get_rank(grp):
-    """ Calcule la semaine correspondante pour un groupe
-        de colle donné.
+def get_rank(grp, max):
+    """Calcule la semaine correspondante pour un groupe
+    de colle donné.
 
-        @param grp Groupe de colle
-        @return rnk Rang actuel du groupe
+    :param grp: Groupe de colle
+    :param max: Nombre de groupe dans la classe
+    :return rnk: Rang actuel du groupe
     """
     if not grp:
-        return 3
-    return 2
+        return
+    vacfile = open('data/zone_' + config.__zone + '.csv')
+    data = csv.reader(vacfile, delimiter=';')
+    vacs = list(tuple(row) for row in data)
+    vacfile.close()
+    start = int(vacs[0][1])
+    now = datetime.now().isocalendar()[1]
+    delt = 0
+    for vac in vacs:
+        if int(vac[1]) <= now:
+            delt += (int(vac[1]) - int(vac[0]))
+        elif int(vac[1]) <= now <= int(vac[0]):
+            delt += now - int(vac[0])
+            break
+    return (now - delt + int(grp)) % max
 
-"""    Publication    """
-
+################
+### Publication
+################
 @route(config.__route)
 @view('kholles')
 def kholle(classe):
@@ -71,12 +93,12 @@ def kholle(classe):
         response.set_cookie(classe + "_grp", group)
     else:
         group = request.get_cookie(classe + "_grp")
-    kholles=get_kholles(classe)
-    data['max'] = math.ceil((len(kholles)-2)/6)
+    kholles = get_kholles(classe)
+    data['max'] = ceil((len(kholles) - 2) / 6)
     return dict(name=classe.upper(),
                 kholles=kholles,
                 group=group,
-                rang=get_rank(group),
+                rang=get_rank(group, len(kholles[0])),
                 data=data)
 
 @route('/assets/<filepath:path>')
@@ -91,4 +113,4 @@ def error404(error):
                 base='<small class="text-muted">' + str(error) + '<small>')
 
 debug(config.__debug)
-run(host='localhost', port=config.__port, reloader=config.__debug)
+run(host=config.__domain, port=config.__port, reloader=config.__debug)
