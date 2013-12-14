@@ -116,4 +116,4 @@ def error404(error):
                 base='<small class="text-muted">' + str(error) + '<small>')
 
 debug(config.__debug)
-run(host=config.__domain, port=config.__port, reloader=config.__debug)
+run(server=config.__server, host=config.__domain, port=config.__port, reloader=config.__debug)

@@ -8,13 +8,11 @@
     
     Fichier de configuration.
 """
-from datetime import date, datetime
-
 __zone = 'c'
-__debug = True
-__path = ''
+__debug = False
 __port = 1357
-__domain = 'localhost'
+__domain = 'domain.fr'
 __route = '/<classe:re:[a-zA-Z0-9_-]+>'
 __ordre = '-'
-__decal = 3
+__decal = 0
+__server = 'wsgiref'
