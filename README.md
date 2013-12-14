@@ -40,9 +40,9 @@ Configuration
 
 Dans le fichier `config.py`, il est possible de paramétrer les valeurs suivantes :
 
-### `__first`
-Date de début d'année
-_Par défaut, `__first = date(datetime.now().year, 9, 1)`._
+### `__zone`
+Zone du département pour la répartition des vacances scolaires. `a` `b`, ou `c`.  
+_Par défaut, `__zone = 'c'`._
 
 ### `__debug`
 Permet de passer en mode débogage, et obtenir davantage de détails lors d'une erreur.  

@@ -10,8 +10,9 @@
 """
 from datetime import date, datetime
 
-__first = date(datetime.now().year, 9, 1)
+__zone = 'c'
 __debug = True
-__path = ""
+__path = ''
 __port = 1357
+__domain = 'localhost'
 __route = '/<classe:re:[a-zA-Z0-9_-]+>'
