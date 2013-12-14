@@ -50,20 +50,41 @@ Particulièrement utile lors de problèmes à répétition. N'hésitez pas alors
 [ticket](https://github.com/LeoColomb/kholloscope/issues/new) !  
 _Par défaut, `__debug = False`._
 
-### `__path`
-Si jamais la racine du dossier du projet n'est pas la même que celle 
-du serveur, attribuer à `__path` le chemin URL d'accès.  
+### `__domain`
+Préciser le domaine du serveur où est localisé l'application.
 Par exemple : Kholloscope de MPSI accessible à `http://example.com/un/deux/trois/mpsi`,
-alors `__path = "un/deux/trois/"`.  
-_Par défaut, `__path = ""`._
+alors `__domain = 'example.com/un/deux/trois'`.  
 
 ### `__port`
 Au cas où l'accès HTTP au serveur se fait par un port diffèrent de `80`.  
-_Par défaut, `__port = 8080`, et aucun changement n'est nécessaire._
+_Par défaut, `__port = 80`, et aucun changement n'est nécessaire._
 
 ### `__route`
 Défini comment le nom de la classe doit être analysé à partir l'URI.  
-_Par défaut, `__route = "/<classe:re:[a-zA-Z0-9_-]+>"`._
+_Par défaut, `__route = '/<classe:re:[a-zA-Z0-9_-]+>'`._
+
+### `__ordre`
+Défini l'ordre montant/descendant pour la succession des groupes au fil 
+des semaines. Exemple sur deux semaines successives :  
+#### `+`
+| Groupe 1  | Groupe 2  | Groupe 3  | ... | Groupe 15 |
+|:---------:|:---------:|:---------:|:---:|:---------:|
+| Groupe 15 | Groupe 1  | Groupe 2  | ... | Groupe 14 |
+#### `-`
+| Groupe 1  | Groupe 2  | Groupe 3  | ... | Groupe 15 |
+|:---------:|:---------:|:---------:|:---:|:---------:|
+| Groupe 2  | Groupe 3  | Groupe 4  | ... | Groupe 1  |
+_Par défaut, `__ordre = '+'`._
+
+### `__decal`
+Nombre de semaines qui séparent celle de la rentrée scolaire à celle 
+du début des colles.  
+_Par défaut, `__decal = 0`._
+
+### `__server`
+Défini l'architecture du serveur et par extension le type d'exécution du script.  
+Voir pour référence les explications sur le [guide Bottle](http://bottlepy.org/docs/dev/deployment.html?highlight=cgi#switching-the-server-backend).  
+_Par défaut, `__server = 'wsgiref'`._
 
 Initialisation
 --------------
@@ -100,6 +121,7 @@ classe. Pour cela, quelques indications :
   |*Matiere 2*|*Matiere 2*|*Matiere 2*|*...*|
   | ...       | ...       | ...       | ... |
 
+  Les jour de la semaine sont numérotés de 0 à 6 (Lundi à Dimanche).  
   En cas de doute, prenez exemple sur le fichier fournit dans l'archive.
 
 Notes de version

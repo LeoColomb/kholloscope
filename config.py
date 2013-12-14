@@ -10,8 +10,8 @@
 """
 __zone = 'c'
 __debug = False
-__port = 1357
 __domain = 'domain.fr'
+__port = 80
 __route = '/<classe:re:[a-zA-Z0-9_-]+>'
 __ordre = '-'
 __decal = 0
