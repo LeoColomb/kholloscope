@@ -16,3 +16,5 @@ __path = ''
 __port = 1357
 __domain = 'localhost'
 __route = '/<classe:re:[a-zA-Z0-9_-]+>'
+__ordre = '-'
+__decal = 3
