@@ -25,14 +25,14 @@ Installation
 L'unique nécessité est de disposer d'un serveur web sur lequel
 est l'environnement Python est disponible.  
 Votre établissement n'en dispose pas d'un ? Il existe des 
-[solutions faciles](http://wiki.python.org/moin/FreeHosts).
+[solutions faciles et gratuites](http://wiki.python.org/moin/FreeHosts).
 
 Ensuite par étapes :
 
 1. Décompresser l'[archive du projet](https://github.com/LeoColomb/kholloscope/archive/master.zip) 
 dans un répertoire du serveur, de préférence à la racine.
-2. Vérifier que la [configuration](#configuration) corresponde à vos besoins.
-3. Modifier le [fichier du tableau de colles](#initialisation) dans le dossier `data`.
+2. Vérifier la [configuration](#configuration) et l'ajuster pour corresponde aux besoins d'exploitation.
+3. Ajouter le [fichier du tableau de colles](#initialisation) dans le dossier `data`.
 4. C'est fini !
 
 Configuration
@@ -83,7 +83,7 @@ _Par défaut, `__decal = 0`._
 
 ### `__server`
 Défini l'architecture du serveur et par extension le type d'exécution du script.  
-Voir pour référence les explications sur le [guide Bottle](http://bottlepy.org/docs/dev/deployment.html?highlight=cgi#switching-the-server-backend).  
+Se référer aux explications du [guide Bottle](http://bottlepy.org/docs/dev/deployment.html?highlight=cgi#switching-the-server-backend).  
 _Par défaut, `__server = 'wsgiref'`._
 
 Initialisation
@@ -98,7 +98,7 @@ classe. Pour cela, quelques indications :
   Noter l'absence d'extension.
 
 * **Le fichier doit être au format [CSV](http://fr.wikipedia.org/wiki/Comma-separated_values).**  
-  Les avantages de ce format sont nombreux, mais nous importe celui de l'édition dans n'importe
+  Les avantages de ce format sont nombreux, mais on retiendra l'édition dans n'importe
   quel tableur-grapheur, et sa facilité de manipulation. 
 
 * **La structure du tableau doit suivre les indications de la légende suivante.**  
@@ -121,8 +121,8 @@ classe. Pour cela, quelques indications :
   |*Matiere 2*|*Matiere 2*|*Matiere 2*|*...*|
   | ...       | ...       | ...       | ... |
 
-  Les jour de la semaine sont numérotés de 0 à 6 (Lundi à Dimanche).  
-  En cas de doute, prenez exemple sur le fichier fournit dans l'archive.
+  Les jours de la semaine sont numérotés de 0 à 6 (Lundi à Dimanche).  
+  En cas de doute, prendre exemple sur le fichier fournit dans l'archive.
 
 Notes de version
 ----------------
