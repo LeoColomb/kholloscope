@@ -83,7 +83,7 @@ _Par défaut, `__decal = 0`._
 
 ### `__server`
 Défini l'architecture du serveur et par extension le type d'exécution du script.  
-Se référer aux explications du [guide Bottle](http://bottlepy.org/docs/dev/deployment.html?highlight=cgi#switching-the-server-backend).  
+Se référer aux explications du [guide Bottle](http://bottlepy.org/docs/dev/deployment.html#switching-the-server-backend).  
 _Par défaut, `__server = 'wsgiref'`._
 
 Initialisation
