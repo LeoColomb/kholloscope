@@ -67,7 +67,7 @@ def get_rank(grp, max):
     """
     if not grp:
         return -1
-    vacfile = open('data/zone_' + config.__zone + '.csv')
+    vacfile = open('data/vac_scol.csv')
     data = csv.reader(vacfile, delimiter=';')
     vacs = list(tuple(row) for row in data)
     vacfile.close()
@@ -97,7 +97,7 @@ def kholle(classe):
     else:
         group = request.get_cookie(classe + "_grp")
     kholles = get_kholles(classe)
-    data['max'] = ceil((len(kholles) - 2) / 6)
+    data['max'] = ceil((len(kholles) - 2.) / 6.)
     return dict(name=classe.upper(),
                 kholles=kholles,
                 group=group,
