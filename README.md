@@ -1,4 +1,4 @@
-﻿Kholloscope
+Kholloscope
 ===========
 
 **Petit Framework pour grand kholloscope.**  
@@ -7,7 +7,7 @@ Publier facilement, en Python, le kholloscope d'une classe préparatoire.
 Utilisation
 -----------
 
-Ce projet vise à simplifier au maximum la mise en place d'un kholloscope, *via* Internet.
+Ce projet vise à simplifier au maximum la mise en place d'un kholloscope, *via* Internet.  
 Cet outil propose les fonctionnalités suivantes :
 
 * Configuration simple — toujours sur [tableur](http://fr.wikipedia.org/wiki/Tableur)
