@@ -67,12 +67,15 @@ def get_rank(grp, max):
     """
     if not grp:
         return -1
-    vacfile = open('data/vac_scol.csv')
+    vacfile = open('data/zone_c.csv')
     data = csv.reader(vacfile, delimiter=';')
     vacs = list(tuple(row) for row in data)
     vacfile.close()
-    now = datetime.now().isocalendar()[1]
-    delt = config.__decal 
+    now = (datetime.now() + timedelta(2)).isocalendar()[1]
+    # Début de semaine le samedi
+    delt = config.__decal
+    if now < 32:
+        now += 52
     for vac in vacs[1:]:
         if int(vac[1]) <= now:
             # Vacances passées, décompte des semaines non "ouvrées"
