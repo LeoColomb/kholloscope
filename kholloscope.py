@@ -18,7 +18,7 @@ Copyright (c) 2013, Léo Colombaro
 
 __name__ = 'Kholloscope'
 __description__ = "Petit framework pour grand kholloscope."
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = "Léo Colombaro"
 __license__ = 'MIT'
 
@@ -65,8 +65,6 @@ def get_rank(grp, max):
     :param max: Nombre de groupe dans la classe
     :return rnk: Rang actuel du groupe
     """
-    if not grp:
-        return -1
     vacfile = open('data/zone_c.csv')
     data = csv.reader(vacfile, delimiter=';')
     vacs = list(tuple(row) for row in data)
@@ -84,6 +82,8 @@ def get_rank(grp, max):
             # En vacances, arrêt de la progression dans le kholloscope
             delt += now - int(vac[0])
             break
+    if not grp:
+        return -1, now - delt - int(vacs[0][1])
     # Ordre * ( Maintenant - Delta des vacances - Début de l'année
     # + Décalage groupe ) % Modulo max groupe
     return (int(config.__ordre + '1') * (now - delt - int(vacs[0][1]) - int(grp)) % max,
