@@ -2,16 +2,19 @@
 % rebase base title='Khôlles de '+name, head=dict(tle='Khôlles de '+name, dsc='Retrouvez vos dates et salles de khôlles.')
 <form class="row">
     <div class="col-md-5">
-        <select autofocus name="grp" class="form-control input-lg" onchange="this.form.submit()">
-            <option value="">Sélectionner un groupe</option>
-            % for k, item in enumerate(kholles[0]):
-            % if str(k) == group:
-            <option value="{{ k }}" selected>Groupe {{ item }}</option>
-            % else:
-            <option value="{{ k }}">Groupe {{ item }}</option>
-            % end
-            % end
-        </select>
+        <div class="input-group">
+            <select autofocus name="grp" class="form-control input-lg form-control" onchange="this.form.submit()">
+                <option value="">Sélectionner un groupe</option>
+                % for k, item in enumerate(kholles[0]):
+                % if str(k) == group:
+                <option value="{{ k }}" selected>Groupe {{ item }}</option>
+                % else:
+                <option value="{{ k }}">Groupe {{ item }}</option>
+                % end
+                % end
+            </select>
+            <span class="input-group-addon">Semaine {{ sem }}</span>
+        </div>
     </div>
 </form>
 <hr />

@@ -86,7 +86,9 @@ def get_rank(grp, max):
             break
     # Ordre * ( Maintenant - Delta des vacances - Début de l'année
     # + Décalage groupe ) % Modulo max groupe
-    return int(config.__ordre + '1') * (now - delt - int(vacs[0][1]) - int(grp)) % max
+    return (int(config.__ordre + '1') * (now - delt - int(vacs[0][1]) - int(grp)) % max,
+        now - delt - int(vacs[0][1])
+        )
 
 ################
 ### Publication
@@ -100,11 +102,13 @@ def kholle(classe):
     else:
         group = request.get_cookie(classe + "_grp")
     kholles = get_kholles(classe)
+    rangs=get_rank(group, len(kholles[0]))
     data['max'] = ceil((len(kholles) - 2.) / 6.)
     return dict(name=classe.upper(),
                 kholles=kholles,
                 group=group,
-                rang=get_rank(group, len(kholles[0])),
+                rang=rangs[0],
+                sem=rangs[1],
                 data=data)
 
 @route('/assets/<filepath:path>')

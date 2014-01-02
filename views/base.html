@@ -17,14 +17,14 @@
     <![endif]-->
 </head>
 <body>
-    <div class="container">
-        % if defined('head'):
-        <div class="page-header">
+    % if defined('head'):
+    <div class="jumbotron">
+        <div class="container">
             <h1>{{ head['tle'] }}</h1>
             <p class="lead">{{ head['dsc'] }}</p>
         </div>
-        % end
-        {{!base}}
     </div>
+    % end
+    <div class="container">{{!base}}</div>
 </body>
 </html>
