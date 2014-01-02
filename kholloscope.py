@@ -18,7 +18,7 @@ Copyright (c) 2013, Léo Colombaro
 
 __name__ = 'Kholloscope'
 __description__ = "Petit framework pour grand kholloscope."
-__version__ = '0.0.3'
+__version__ = '0.1.0'
 __author__ = "Léo Colombaro"
 __license__ = 'MIT'
 
