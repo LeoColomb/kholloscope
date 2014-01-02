@@ -128,12 +128,14 @@ Notes de version
 ----------------
 
 ### 1.0
+_Première version exploitable_
 
-* Première version exploitable
-* Implemnatation
-  * CSV Parser
-  * Groupe delta
-  * ...
+* CSV Parser
+* Mise en Python du tableau
+* Affichage mobile
+* Groupe + Vacs delta
+* Multi-classes
+* ...
 
 Licence
 -------
