@@ -63,7 +63,7 @@ def get_rank(grp, max):
 
     :param grp: Groupe de colle
     :param max: Nombre de groupe dans la classe
-    :return rnk: Rang actuel du groupe
+    :return rnk: Rang actuel du groupe, Numéro de la semaine de colle
     """
     vacfile = open('data/zone_c.csv')
     data = csv.reader(vacfile, delimiter=';')
