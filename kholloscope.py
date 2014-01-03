@@ -28,8 +28,9 @@ from bottle import (
     debug, abort,
     error, request,
     response )
-from datetime import datetime
+from datetime import datetime, timedelta
 from math import ceil
+from re import match
 import csv
 import config
 
@@ -97,7 +98,7 @@ def get_rank(grp, max):
 @view('kholles')
 def kholle(classe):
     group = request.query.grp
-    if group:
+    if match('[0-9]+', group):
         response.set_cookie(classe + "_grp", group, None, max_age=3600 * 24 * 30)
     else:
         group = request.get_cookie(classe + "_grp")
