@@ -62,6 +62,7 @@ def get_week():
     """Calcule la semaine de colle actuelle.
 
     :return week: Numéro de la semaine de colle
+    :todo: Améliorer le script
     """
     vacfile = open('data/zone_' + config.__zone + '.csv')
     data = csv.reader(vacfile, delimiter=';')
