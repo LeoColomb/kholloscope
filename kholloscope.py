@@ -58,15 +58,12 @@ def get_kholles(cls):
     datafile.close()
     return khl
 
-def get_rank(grp, max):
-    """Calcule la semaine correspondante pour un groupe
-    de colle donné.
+def get_week():
+    """Calcule la semaine de colle actuelle.
 
-    :param grp: Groupe de colle
-    :param max: Nombre de groupe dans la classe
-    :return rnk: Rang actuel du groupe, Numéro de la semaine de colle
+    :return week: Numéro de la semaine de colle
     """
-    vacfile = open('data/zone_c.csv')
+    vacfile = open('data/zone_' + config.__zone + '.csv')
     data = csv.reader(vacfile, delimiter=';')
     vacs = list(tuple(row) for row in data)
     vacfile.close()
@@ -83,13 +80,23 @@ def get_rank(grp, max):
             # En vacances, arrêt de la progression dans le kholloscope
             delt += now - int(vac[0])
             break
+    # Maintenant - Delta des vacances - Début de l'année
+    return now - delt - int(vacs[0][1])
+
+def get_rank(grp, max):
+    """Calcule la semaine correspondante pour un groupe
+    de colle donné.
+
+    :param grp: Groupe de colle
+    :param max: Nombre de groupe dans la classe
+    :return rnk: Rang actuel du groupe, Numéro de la semaine de colle
+    """
+    week = get_week()
     if not grp:
-        return -1, now - delt - int(vacs[0][1])
-    # Ordre * ( Maintenant - Delta des vacances - Début de l'année
-    # + Décalage groupe ) % Modulo max groupe
-    return (int(config.__ordre + '1') * (now - delt - int(vacs[0][1]) - int(grp)) % max,
-        now - delt - int(vacs[0][1])
-        )
+        return -1, week + 1
+    # Ordre * ( Semaine + Décalage groupe ) % Modulo max groupe
+    return (int(config.__ordre + '1') * (week - int(grp)) % max,
+        week + 1)
 
 ################
 ### Publication
@@ -103,7 +110,7 @@ def kholle(classe):
     else:
         group = request.get_cookie(classe + "_grp")
     kholles = get_kholles(classe)
-    rangs=get_rank(group, len(kholles[0]))
+    rangs = get_rank(group, len(kholles[0]))
     data['max'] = ceil((len(kholles) - 2.) / 6.)
     return dict(name=classe.upper(),
                 kholles=kholles,
