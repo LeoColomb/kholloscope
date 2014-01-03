@@ -83,20 +83,19 @@ def get_week():
     # Maintenant - Delta des vacances - Début de l'année
     return now - delt - int(vacs[0][1])
 
-def get_rank(grp, max):
+def get_rank(week, grp, max):
     """Calcule la semaine correspondante pour un groupe
     de colle donné.
 
+    :param week: Numéro de la semaine de colle
     :param grp: Groupe de colle
     :param max: Nombre de groupe dans la classe
     :return rnk: Rang actuel du groupe, Numéro de la semaine de colle
     """
-    week = get_week()
     if not grp:
-        return -1, week + 1
+        return -1
     # Ordre * ( Semaine + Décalage groupe ) % Modulo max groupe
-    return (int(config.__ordre + '1') * (week - int(grp)) % max,
-        week + 1)
+    return int(config.__ordre + '1') * (week - int(grp)) % max
 
 ################
 ### Publication
@@ -110,13 +109,13 @@ def kholle(classe):
     else:
         group = request.get_cookie(classe + "_grp")
     kholles = get_kholles(classe)
-    rangs = get_rank(group, len(kholles[0]))
+    week = get_week()
     data['max'] = ceil((len(kholles) - 2.) / 6.)
     return dict(name=classe.upper(),
                 kholles=kholles,
                 group=group,
-                rang=rangs[0],
-                sem=rangs[1],
+                sem=week + 1,
+                rang=get_rank(week, group, len(kholles[0])),
                 data=data)
 
 @route('/assets/<filepath:path>')
