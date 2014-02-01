@@ -60,9 +60,11 @@
         </div>
         <ul class="list-group">
             % try:
+            % if kholles[(6*k)+7][rang]:
             <li class="list-group-item list-group-item-{{ data['color'][k % len(data['color'])] }}">
                 {{ kholles[(6*k)+7][rang] }}
             </li>
+            % end
             % except IndexError:
             % pass
             % end
