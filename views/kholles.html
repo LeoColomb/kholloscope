@@ -58,12 +58,14 @@
         <div class="panel-heading">
             <h3 class="panel-title">{{ kholles[(6*k)+2][rang] }}</h3>
         </div>
-        % if defined('kholles[(6*k)+6][rang]') and kholles[(6*k)+7][rang]:
-        <div class="panel-body alert-{{ data['color'][k % len(data['color'])] }}">
-            {{ kholles[(6*k)+7][rang] }}
-        </div>
-        % end
         <ul class="list-group">
+            % try:
+            <li class="list-group-item list-group-item-{{ data['color'][k % len(data['color'])] }}">
+                {{ kholles[(6*k)+7][rang] }}
+            </li>
+            % except IndexError:
+            % pass
+            % end
             % for i, c in enumerate(data['cells']):
             <li class="list-group-item">
                 <span class="badge">{{ c }}</span>
