@@ -9,16 +9,16 @@ en Python, le kholloscope d'une classe préparatoire.
 https://github.com/LeoColomb/kholloscope
 Copyright (c) 2013, Léo Colombaro
 
-:version: 0.0.9
-:copyright: (c) 2013 Léo Colombaro
-:license: MIT LICENSE
+:version: 0.1.2
+:copyright: (c) 2014 Léo Colombaro
+:license: MIT
 :package: Python 2.7+
 :modules: bottle, datetime, csv
 """
 
 __name__ = 'Kholloscope'
 __description__ = "Petit framework pour grand kholloscope."
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __author__ = "Léo Colombaro"
 __license__ = 'MIT'
 
