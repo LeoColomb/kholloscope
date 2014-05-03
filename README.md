@@ -145,7 +145,3 @@ Copyright (c) 2012, Marcel Hellkamp.
 
 Kholloscope Python — MIT License.  
 Copyright (c) 2013, Leo Colombaro.  
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/LeoColomb/kholloscope/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
