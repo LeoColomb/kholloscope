@@ -5,6 +5,13 @@
 data/*
 !data/sample.csv
 !data/vac_scol.csv
+__untyped__
+bower_components
+node_modules
+/kholloscope.*
+bin/
+obj/
+web.config
 
 #############
 ## Python

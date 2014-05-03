@@ -1,0 +1,15 @@
+{
+  "name": "kholloscope",
+  "version": "0.1.1",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "*"
+  },
+  "exportsOverride": {
+    "bootstrap": {
+      "fonts": "dist/fonts/*",
+      "css": "dist/css/bootstrap.min.css"
+    }
+  }
+}
